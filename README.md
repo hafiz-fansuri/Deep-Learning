@@ -22,9 +22,9 @@ Each audio file is transformed into a Mel spectrogram representation and fed int
 
 ## 📊 Dataset Overview
 
-- Format: `.ogg`
-- Labels: `class_name`
-- Total samples: ~35,000+
+- Format: `.ogg`  
+- Labels: `class_name`  
+- Total samples: ~35,000+  
 - Classes:
   - Aves  
   - Mammalia  
@@ -33,8 +33,8 @@ Each audio file is transformed into a Mel spectrogram representation and fed int
   - Insecta  
 
 ⚠️ **Severe class imbalance:**
-- Aves dominates the dataset
-- Reptilia is extremely underrepresented
+- Aves dominates the dataset  
+- Reptilia is extremely underrepresented  
 
 ---
 
@@ -42,12 +42,12 @@ Each audio file is transformed into a Mel spectrogram representation and fed int
 
 The dataset (~9GB) is not included in this repository.
 
-👉 Download here:  
+Download here:  
 https://drive.google.com/drive/folders/1weWJeCExWQS6FhUqsT8BjlV9nQw5i2HM?usp=sharing
 
 After downloading:
-- Place files inside the `train_audio/` directory
-- Ensure `train.csv` is in the root project folder
+- Place files inside the `train_audio/` directory  
+- Ensure `train.csv` is in the root project folder  
 
 ---
 
@@ -74,16 +74,15 @@ We analyzed:
 - Aves dominates the dataset  
 - Minority classes have significantly fewer samples  
 
-📁 EDA outputs are saved in:
+EDA outputs are saved in:
 outputs/eda/
 
+
 ---
 
 ## ⚙️ Pipeline
+CSV → Filter → Sample → Encode → Audio → Mel Spectrogram → Cache → Split → Loader → CNN → Train → Evaluate
 
-<p align="center">
-  <img src="pipeline.png" width="600">
-</p>
 
 ---
 
@@ -104,54 +103,8 @@ Baseline CNN:
 ## ⚖️ Handling Class Imbalance
 
 To address class imbalance:
-- Class weights are applied in the loss function
-- Helps the model learn minority classes more effectively
-
----
-
-## 📈 Evaluation Metrics
-
-- Accuracy  
-- Precision  
-- Recall  
-- F1-score  
-- Macro & Weighted averages  
-
----
-
-## 📊 Baseline Performance
-
-### Overall Accuracy
-
----
-
-## ⚙️ Pipeline
-
-<p align="center">
-  <img src="pipeline.png" width="600">
-</p>
-
----
-
-## 🤖 Model Architecture
-
-Baseline CNN:
-
-- Conv2D → BatchNorm → ReLU → MaxPool  
-- Conv2D → BatchNorm → ReLU → MaxPool  
-- AdaptiveAvgPool  
-- Fully Connected Layer  
-
-**Input:**
-- Mel spectrogram (1 × 128 × T)
-
----
-
-## ⚖️ Handling Class Imbalance
-
-To address class imbalance:
-- Class weights are applied in the loss function
-- Helps the model learn minority classes more effectively
+- Class weights are applied in the loss function  
+- Helps the model learn minority classes more effectively  
 
 ---
 
@@ -172,20 +125,25 @@ Accuracy: 0.612
 
 ### Classification Report
 
-          precision    recall  f1-score   support
+| Class     | Precision | Recall | F1-score | Support |
+|----------|----------:|------:|---------:|--------:|
+| Amphibia | 0.71 | 0.52 | 0.60 | 90 |
+| Aves     | 0.61 | 0.75 | 0.68 | 100 |
+| Insecta  | 0.57 | 0.65 | 0.60 | 40 |
+| Mammalia | 0.31 | 0.25 | 0.28 | 20 |
 
-Amphibia       0.71      0.52      0.60        90
-    Aves       0.61      0.75      0.68       100
- Insecta       0.57      0.65      0.60        40
-Mammalia       0.31      0.25      0.28        20
+### Summary Metrics
 
-accuracy                           0.61       250
-macro avg       0.55     0.54      0.54       250
-weighted avg    0.62     0.61      0.61       250
+| Metric        | Precision | Recall | F1-score | Support |
+|--------------|----------:|------:|---------:|--------:|
+| Macro Avg    | 0.55 | 0.54 | 0.54 | 250 |
+| Weighted Avg | 0.62 | 0.61 | 0.61 | 250 |
 
+---
 
-### Observations:
-- Model performs best on **Aves** due to higher representation  
+## 📊 Observations
+
+- Model performs best on **Aves** due to high representation  
 - Performance on **Mammalia** is lower due to limited samples  
 - Overall performance is constrained by class imbalance  
 
@@ -194,16 +152,20 @@ weighted avg    0.62     0.61      0.61       250
 ## 🚀 How to Run
 
 ### 1. Install dependencies
-```bash
+
 pip install -r requirements.txt
 
 ### 2. Run training
+
 python code/BASELINE.py
 
-🔥 Future Improvements
-Data augmentation (noise injection, time masking, pitch shift)
-Use of pretrained models (ResNet, EfficientNet)
-Focal loss for imbalance handling
-Better sampling strategies
-Longer temporal context modeling
 
+---
+
+## 🔥 Future Improvements
+
+- Data augmentation (noise injection, time masking, pitch shift)  
+- Use of pretrained models (ResNet, EfficientNet)  
+- Focal loss for imbalance handling  
+- Better sampling strategies  
+- Longer temporal context modeling  
