@@ -45,9 +45,6 @@ Dataset (~9GB) is not included.
 👉 Download here: **https://drive.google.com/drive/folders/1weWJeCExWQS6FhUqsT8BjlV9nQw5i2HM?usp=sharing**
 
 After downloading:
-data/
-├── train.csv
-└── train_audio/
 ---
 
 ## 🔍 Exploratory Data Analysis (EDA)
@@ -108,7 +105,6 @@ We use **class weighting**:
 
 ## 📊 Baseline Performance
 
-Example (replace with your results):
 
 | Class     | Precision | Recall | F1-score |
 |----------|----------|--------|---------|
