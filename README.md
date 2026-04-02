@@ -65,6 +65,7 @@ outputs/eda/
 ---
 
 ## ⚙️ Pipeline
+</p>
 <p align="center">
   <img src="pipeline.png" width="600">
 </p>
