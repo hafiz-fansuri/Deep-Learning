@@ -43,7 +43,7 @@ Each audio file is transformed into a Mel spectrogram representation and fed int
 The dataset (~9GB) is not included in this repository.
 
 Download here:  
-https://drive.google.com/drive/folders/1tJF6oQBQtGvexWWjfHLdcqlNrBon3KBM?usp=drive_link
+https://drive.google.com/drive/folders/1tJF6oQBQtGvexWWjfHLdcqlNrBon3KBM?usp=sharing
 
 After downloading:
 - Place files inside the `train_audio/` directory  
