@@ -246,7 +246,7 @@ Develop a simple deep learning model to classify biological sounds into major cl
 
 **Results:**
 
-* Validation Accuracy: *(insert your accuracy here)*
+* Validation Accuracy: 0.612
 * Model successfully learned basic class distinctions
 
 **Limitations:**
