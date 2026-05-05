@@ -208,3 +208,90 @@ This project demonstrates a working baseline implementation of Google Perch for 
 
 * `submission.csv` generated in Kaggle format
 * Compatible with BirdCLEF 2026 evaluation system
+
+## 13. Iterative Model Development Log
+
+The development of this project followed two main stages: a custom CNN baseline model and a transition to the Google Perch v2 pretrained model.
+
+---
+
+### Version 1 (V1): CNN Baseline Model
+
+**Objective:**
+Develop a simple deep learning model to classify biological sounds into major classes (Aves, Mammalia, Amphibia, Insecta).
+
+**Model Architecture:**
+
+* Input: Mel spectrogram (128 mel bands)
+* 2 Convolutional layers (32 → 64 channels)
+* Batch Normalization + ReLU + MaxPooling
+* Adaptive Average Pooling + Fully Connected layer
+
+**Key Hyperparameters:**
+
+* Sample Rate: 16 kHz
+* Audio Duration: 5 seconds
+* Batch Size: 8
+* Epochs: 10
+* Optimizer: Adam (learning rate = 1e-4)
+* Loss Function: CrossEntropy with class weights
+
+**Techniques Applied:**
+
+* Spectrogram caching for faster training
+* Balanced sampling (max 500 samples per class)
+* Removal of low-sample class (Reptilia)
+* Stratified train-validation split
+* Per-sample normalization
+
+**Results:**
+
+* Validation Accuracy: *(insert your accuracy here)*
+* Model successfully learned basic class distinctions
+
+**Limitations:**
+
+* Limited ability to generalize to complex soundscapes
+* Requires large labeled dataset for improvement
+* Not suitable for full BirdCLEF species classification
+
+---
+
+### Version 2 (V2): Google Perch v2 Model
+
+**Objective:**
+Improve classification performance using a pretrained large-scale bioacoustic model.
+
+**Model Description:**
+
+* Google Perch v2 (TensorFlow SavedModel)
+* Pretrained on large-scale environmental audio
+* Performs direct inference (no training required)
+
+**Key Techniques Applied:**
+
+* Taxonomy-based label mapping (scientific → BirdCLEF labels)
+* 5-second audio segmentation
+* Parallel inference using multi-threading
+* Runtime constraint handling (~5300 seconds)
+
+**Results:**
+<img width="1068" height="122" alt="Screenshot 2026-05-05 221729" src="https://github.com/user-attachments/assets/b110e54b-4d3d-495a-b137-4c6bceba54ef" />
+
+* Improved prediction capability compared to CNN baseline (qualitative observation)
+* Able to detect more complex acoustic patterns
+* Submission file successfully generated
+
+**Limitations:**
+
+* High computational cost (slow inference)
+* Unable to process full dataset within time limit
+* Incomplete species coverage
+
+---
+
+### Overall Insight
+
+The transition from a CNN baseline model to the Perch model shows a shift from a **trainable but limited approach** to a **powerful pretrained system**. However, this introduces new challenges in runtime efficiency and dataset coverage, which are critical for achieving better performance in the BirdCLEF competition.
+
+
